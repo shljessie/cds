@@ -1,6 +1,6 @@
 # Coronavirus Project 
 
-Team members: Jessie Lee, Kaitlyn Chen, Kassie Wang
+Team members: Kaitlyn Chen, Kassie Wang, Jessie Lee
 
 
 ## How are people responding to Coronavirus?
