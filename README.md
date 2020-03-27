@@ -36,25 +36,38 @@ How much uncertainty is there with new coronavirus information? How much false i
 
 
 #### Coronavirus in different languages:
-English - #coronavirus, #COVID-19
-Chinese- #冠状病毒组
-South Korea-#코로나바이러스
-Italian-#coronavirus
-German -#coronavirus
-Switzerland-#coronavirus
-France-#coronavirus
-Iran-#coronavirus
-Spain-#coronavirus
+-English - #coronavirus, #COVID-19,coronavirus
+-Chinese- #冠状病毒组 ,#COVID-19, 冠状病毒组
+-South Korea-#코로나바이러스 #COVID-19 , 코로나바이러스
+-Italian-#coronavirus #COVID-19 ,coronavirus
+-German -#coronavirus #COVID-19 ,coronavirus
+-Switzerland-#coronavirus #COVID-19 ,coronavirus
+-France-#coronavirus #COVID-19, coronavirus
+-Iran-#ویروس کرونا #COVID-19 , ویروس کرونا 
+-Spain-#coronavirus #COVID-19,coronavirus
+
+### Geocodes
+-Western US : 41, -111 within 1207km'
+-Eastern US : 37.920582, -83.827201 within 1448km
+-Rome, Italy: 41.88375, 12.48736 within 477 km
+-Germany: 50.98341, 10.31572 within 428 km
+-Switzerland: 46.82772, 8.41590 within 130 km
+-France: 47.70699, 3.33762 within 450 km
+-Iran: 31.87864, 54.35253 within 700 km
+-Spain: 40.42953, -3.67932 within 323 km
+-UK: 53.47966, -2.26625 within 437 km
+-South Korea: 36.41540, 128.17752 within 238 km
+
 
 #### Dataset(s):
-Daily Novel Coronavirus 2019 Dataset (JHU)
-https://www.kaggle.com/sudalairajkumar/novel-corona-virus-2019-dataset
+-Daily Novel Coronavirus 2019 Dataset (JHU)
+-https://www.kaggle.com/sudalairajkumar/novel-corona-virus-2019-dataset
 
-Insights/Resources:
-Twitter Coronavirus Data Project
+### Insights/Resources:
+-Twitter Coronavirus Data Project
 https://towardsdatascience.com/how-did-twitter-react-to-the-coronavirus-pandemic-2857592b449a
 
-Web Scraping Twitter:
+-Web Scraping Twitter:
 https://towardsdatascience.com/how-to-scrape-tweets-from-twitter-59287e20f0f1 
 
 
