@@ -42,14 +42,6 @@
         let x = d3.scaleTime().range([0, width]);
         let y0 = d3.scaleLinear().range([height, 0]);
         let y1 = d3.scaleLinear().range([height, 0]);
-        
-        let tweetline = d3.line()
-            .x(function(d) { return x(d.date); })
-            .y(function(d) { return y0(d.tweet); });
-        
-        let caseline = d3.line()
-            .x(function(d) { return x(d.date); })
-            .y(function(d) { return y1(d.case); });
 
         let svg = d3.select("body").append("svg")
             .attr("width", svgwidth)
@@ -69,6 +61,24 @@
                 d.recovered = +d.Recovered;
             });
 
+            let allGroup = ["case", "death", "recovered"];
+
+            d3.select("#selectButton")
+                .selectAll('myOptions')
+     	        .data(allGroup)
+                .enter()
+    	        .append('option')
+                .text(function (d) { return d; }) // text showed in the menu
+                .attr("value", function (d) { return d; }) // corresponding value returned by the button
+
+            let line1 = d3.line()
+                        .x(function(d) { return x(d.date); })
+                        .y(function(d) { return y0(d.tweet); });
+        
+            let line2 = d3.line()
+                        .x(function(d) { return x(d.date); })
+                        .y(function(d) { return y1(d.case); });
+
             // Scale the range of the data
             x.domain(d3.extent(data, function(d){
                 return d.date;
@@ -84,14 +94,14 @@
             svg.append("path")
                 .data([data])
                 .attr("class", "line")
-                .attr("d", tweetline);
+                .attr("d", line1);
 
             // Add the valueline2 path.
             svg.append("path")
                 .data([data])
                 .attr("class", "line")
                 .style("stroke", "red")
-                .attr("d", caseline);
+                .attr("d", line2);
 
             // Add the X Axis
             svg.append("g")
@@ -109,9 +119,41 @@
                 .attr("transform", "translate( " + width + ", 0 )")
                 .call(d3.axisRight(y1)); 
 
-            });   
+            // A function that update the chart
+            function update(factor) {
 
+                // Create new data with the selection?
+                var dataFilter = data.map(function(d){return {date: d.date, value:d[factor]} })
+                
+                console.log(dataFilter);
+                // Give these new data to update line
+                line2
+                    .datum(dataFilter)
+                    .transition()
+                    .duration(1000)
+                    .attr("d", d3.line())
+                    .x(function(d) { return x(d.date); })
+                    .y(function(d) { return y1(d.value); });
+                }
+
+                y1.domain([0, d3.max(data, function(d){
+                    return d.value;
+                })]);
+
+            }); 
+
+        // Helper events for our buttons
+        d3.select("#selectButton").on("change", function(d) {
+            // recover the option that has been chosen
+            var selectedOption = d3.select(this).property("value")
+            // run the updateChart function with this selected option
+            update(selectedOption)
+    })
     </script>
+    
+</br> 
+    <select id="selectButton"></select>
+    
 </body>
 
 </html>
