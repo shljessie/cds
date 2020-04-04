@@ -135,12 +135,17 @@
                 .attr("class", "axisRed")
                 .attr("transform", "translate( " + width + ", 0 )")
                 .call(d3.axisRight(y1))
-                .append("text")
-                    .attr("transform", "rotate(-90)")
-                    .attr("x", - height/2)
-                    .attr("y", margin.right*9/10)
-                    .style("text-anchor", "middle")
-                    .text("Number of Confirmed"); 
+                
+            const y1_label = svg.append("text")
+                .attr("class", "y axis")
+                .attr("fill", "red")
+                .style("text-anchor", "middle")
+                .attr("font-family", "sans-serif")
+                .attr("font-size", 10)
+                .attr("x", width + margin.right * 9/10)
+                .attr("y", height /2)
+                .attr("transform", "rotate(-90, " + (width + margin.right * 9/10) + "," + height /2  +")")
+                .text("Number of Confirmed"); 
 
             // A function that update the chart
             function update(factor) {
@@ -156,7 +161,9 @@
                 line2_svg.transition(1000).attr("d", line2);
 
                 y1_axis.transition(1000)
-                    .call(d3.axisRight(y1))
+                    .call(d3.axisRight(y1));
+
+                y1_label.transition(1000)
                     .text("Number of " + String(factor));
                 }
 
