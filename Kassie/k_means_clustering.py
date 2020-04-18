@@ -1,3 +1,4 @@
+from sklearn.cluster import KMeans
 import string
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
@@ -9,8 +10,9 @@ import pandas as pd
 from nltk import sent_tokenize, word_tokenize
 from nltk.stem.snowball import SnowballStemmer
 from itertools import islice
+from sklearn.feature_extraction.text import TfidfVectorizer
 
-df = pd.read_csv("megadataset.csv")
+df = pd.read_csv("english_data.csv")
 
 
 def content_extractor(content, start=None, end=None):
@@ -25,50 +27,50 @@ def content_extractor(content, start=None, end=None):
         return content
 
 
-def tokenization_s(sentences):  # same can be achieved for words tokens
-    s_new = []
-    for sent in (sentences[:][0]):
-        s_token = sent_tokenize(sent)
-        if s_token != '':
-            s_new.append(s_token)
-    return s_new
+# def tokenization_s(sentences):  # same can be achieved for words tokens
+#     s_new = []
+#     for sent in (sentences[:][0]):
+#         s_token = sent_tokenize(sent)
+#         if s_token != '':
+#             s_new.append(s_token)
+#     return s_new
 
 
-def preprocess(text):
-    clean_data = []
-    for x in (text[:][0]):  # this is Df_pd for Df_np (text[:])
-        new_text = re.sub('<.*?>', '', x)   # remove HTML tags
-        new_text = re.sub(r'[^\w\s]', '', new_text)  # remove punc.
-        new_text = re.sub(r'\d+', '', new_text)  # remove numbers
-        new_text = new_text.lower()  # lower case, .upper() for upper
-        if new_text != '':
-            clean_data.append(new_text)
-    return clean_data
+# def preprocess(text):
+#     clean_data = []
+#     for x in (text[:][0]):  # this is Df_pd for Df_np (text[:])
+#         new_text = re.sub('<.*?>', '', x)   # remove HTML tags
+#         new_text = re.sub(r'[^\w\s]', '', new_text)  # remove punc.
+#         new_text = re.sub(r'\d+', '', new_text)  # remove numbers
+#         new_text = new_text.lower()  # lower case, .upper() for upper
+#         if new_text != '':
+#             clean_data.append(new_text)
+#     return clean_data
 
 
-def tokenization_w(words):
-    w_new = []
-    for w in (words[:][0]):  # for NumPy = words[:]
-        w_token = word_tokenize(w)
-        if w_token != '':
-            w_new.append(w_token)
-    return w_new
+# def tokenization_w(words):
+#     w_new = []
+#     for w in (words[:][0]):  # for NumPy = words[:]
+#         w_token = word_tokenize(w)
+#         if w_token != '':
+#             w_new.append(w_token)
+#     return w_new
 
 
-snowball = SnowballStemmer(language='english')
+# snowball = SnowballStemmer(language='english')
 
 
-def stemming(words):
-    new = []
-    stem_words = [snowball.stem(x) for x in (words[:][0])]
-    new.append(stem_words)
-    return new
+# def stemming(words):
+#     new = []
+#     stem_words = [snowball.stem(x) for x in (words[:][0])]
+#     new.append(stem_words)
+#     return new
 
 
-ser1 = df['text'].apply(
-    lambda x: content_extractor(x, "start_text", "end_text"))
-print(ser1)
-test_pd = pd.DataFrame(ser1)
+# ser1 = df['text'].apply(
+#     lambda x: content_extractor(x, "start_text", "end_text"))
+# print(ser1)
+# test_pd = pd.DataFrame(ser1)
 # text = pd.read_csv('twitter_text.csv', encoding='utf-8', header=None)
 # clean_test = preprocess(test_pd)
 # clean_words = tokenization_w(clean_test)
@@ -91,13 +93,42 @@ def text_process(text):
     return [stemmer.lemmatize(word) for word in nopunc]
 
 
-#testing the function with a sample text#
-sample_text = "Hey There! This is a Sample review, which 123happens {blah}%456 to contain happened punctuations universal rights of right contained."
-for index, row in islice(test_pd.iterrows(), 0, None):
-    new_entry = []
-    new_entry += [text_process(str(row['text']))]
-    processed_df = pd.DataFrame([new_entry], columns=['cleaned_text'])
-    df = df.append(processed_df, ignore_index=True)
+# creating preprocessed csv
+# for index, row in islice(test_pd.iterrows(), 0, None):
+#     new_entry = []
+#     new_entry += [text_process(str(row['text']))]
+#     processed_df = pd.DataFrame([new_entry], columns=['cleaned_text'])
+#     df = df.append(processed_df, ignore_index=True)
 
-df.to_csv('preprocessed.csv', mode='w',
-          columns=['cleaned_text'], index=False, encoding="utf-8")
+# df.to_csv('english_preprocessed.csv', mode='w',
+#           columns=['cleaned_text'], index=False, encoding="utf-8")
+
+df_clean = pd.read_csv("cleaned.csv")
+df_clean = df_clean.dropna()
+
+
+def nlp(df):
+    # lowercase everything
+    # get rid of '\n' from whitespace
+    # regex remove hyperlinks
+    # removing '&gt;'
+    # check for emojis
+    # remove emojis
+    # remove punctuation
+    # remove ' s ' from removing punctuation
+
+    # regex remove hyperlinks
+    df['cleaned_text'] = df['cleaned_text'].str.replace(
+        'http\S+|www.\S+', '', case=False)
+    # removing '&gt;'
+    df['cleaned_text'] = df['cleaned_text'].apply(
+        lambda x: x.replace('&gt;', ''))
+    # remove ' s ' that was created after removing punctuations
+    df['cleaned_text'] = df['cleaned_text'].apply(
+        lambda x: str(x).replace(" s ", " "))
+    return df
+
+
+nlp(df_clean)
+df_clean.to_csv('better_cleaned.csv', mode='w', columns=['cleaned_text'],
+                index=False, encoding="utf-8")
