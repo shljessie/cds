@@ -1,9 +1,9 @@
 ,cluster,subjectivity,polarity,words,count
-0,0,0.379292067,0.038879943,"['trump', 'president', 'response', 'donald', 'white house', 'americans', 'us', 'administration', 'pandemic', 'people']",822
-1,1,0.358432086,0.065053939,"['people', 'help', 'pandemic', 'time', 'health', 'us', 'response', 'public', 'today', 'medical']",4751
-2,2,0.446292869,0.132779836,"['cases', 'deaths', 'confirmed', 'county', 'reported', 'us', 'health', 'weeks', 'ago', 'people']",458
-3,3,0.347245561,0.03498212,"['people', 'us', 'time', 'immune', 'stay', 'fuck', 'positive', 'tested']",606
-4,4,0.409681062,0.062391619,"['people', 'us', 'time', 'immune', 'stay', 'fuck', 'positive', 'tested']",1018
-5,5,0.3966837,0.076081704,"['people', 'testing', 'us', 'health', 'stay', 'positive', 'time', 'help', 'state', 'spread']",2537
-6,6,0.136496386,0.021253707,"['immune', 'drank', 'eat', 'water', 'bathroom', 'house', 'swam', 'basement', 'party', 'high']",109
-7,7,0.208193498,0.048329261,"['briefing', 'task', 'force', 'press', 'room', 'members', 'hold', 'james', 'brady', 'schedule']",101
+0,0,0.379292067,0.038879943,"trump, president, response, donald, white house, americans, us, administration, pandemic, people",822
+1,1,0.358432086,0.065053939,"people, help, pandemic, time, health, us, response, public, today, medical'",4751
+2,2,0.446292869,0.132779836,"cases, deaths, confirmed, county, reported, us, health, weeks, ago, people",458
+3,3,0.347245561,0.03498212,"people, us, time, immune, stay, fuck, positive, tested",606
+4,4,0.409681062,0.062391619,"people, us, time, stay, day, feel, health, home, tested, hope",1018
+5,5,0.3966837,0.076081704,"people, testing, us, health, stay, positive, time, help, state, spread",2537
+6,6,0.136496386,0.021253707,"immune, drank, eat, water, bathroom, house, swam, basement, party, high",109
+7,7,0.208193498,0.048329261,"briefing, task, force, press, room, members, hold, james, brady, schedule",101
